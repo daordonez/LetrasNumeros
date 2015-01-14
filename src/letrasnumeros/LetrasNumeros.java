@@ -54,7 +54,7 @@ public class LetrasNumeros {
         int bloque = 0;
         
         if (num <= 0) {
-            eixidaNum("Cero", "Resultat");
+            eixNum("Zero");
         } else if (num > 9) {
             bloque = 1;
         } else if (num > 20 && num < 99) {
@@ -66,7 +66,7 @@ public class LetrasNumeros {
         } else if (num >= 1000000 && num < 999999999) {
             bloque = 5;
         }else {
-            eixidaNum("Nombre massa llarg", "Informació");
+            eixidaNumCab("Nombre massa llarg", "Informació");
         }
         
         return bloque;
@@ -75,34 +75,34 @@ public class LetrasNumeros {
     static void unidadesLet(int unidad){
     switch (unidad) {
             case 1:
-                salidaNum("U");
+                eixNum("U");
                 break;
             case 2:
-                salidaNum("Dos");
+                eixNum("Dos");
                 break;
             case 3:
-                salidaNum("Tres");
+                eixNum("Tres");
                 break;
             case 4:
-                salidaNum("Quatre");
+                eixNum("Quatre");
                 break;
             case 5:
-                salidaNum("Cinc");
+                eixNum("Cinc");
                 break;
             case 6:
-                salidaNum("Sis");
+                eixNum("Sis");
                 break;
             case 7:
-                salidaNum("Set");
+                eixNum("Set");
                 break;
             case 8:
-                salidaNum("Huit");
+                eixNum("Huit");
                 break;
             case 9:
-                salidaNum("Nou");
+                eixNum("Nou");
                 break;
             default:
-                eixidaNum("Valor no comprés", "Informació");
+                eixidaNumCab("Valor no comprés", "Informació");
         }
     }
     static void desenaEnLet(int desena){
@@ -127,12 +127,15 @@ public class LetrasNumeros {
             case 9:
                 break;
             default:
-                eixidaNum("Valor no comprés", "Información");
+                eixidaNumCab("Valor no comprés", "Información");
                 break;
         }
     }
     //Salida de mensajes
-    static void eixidaNum( String mensaje, String cabecera){
+    static void eixNum(String num){
+        System.out.println(num);
+    }
+    static void eixidaNumCab( String mensaje, String cabecera){
         
         for (int i = 0; i < 10;i++){System.out.print("_");}
         System.out.println("+ "+cabecera+" +");
