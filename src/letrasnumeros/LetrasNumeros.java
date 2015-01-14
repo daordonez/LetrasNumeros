@@ -10,19 +10,16 @@ public class LetrasNumeros {
      */
     public static void main(String[] args) {
         
+        //Contenedor de principal de valor
         int numero;
         
+        //Recogida de datos del usuario
         Scanner teclado = new Scanner(System.in);
-        
         System.out.print("Introdueix numero:");
         numero = teclado.nextInt();
-        //Llamadas
-        int resUnidades = digitUnit(numero);
-        int resDecenas = digitDecenas(numero);
-        int resCentenas = digitCentenas(numero);
-        
-        
-        longNumero(numero);
+       
+        //Disparador de las demas funciones
+        bifNumero(numero);
           
     }
     
@@ -42,8 +39,8 @@ public class LetrasNumeros {
             centenas = numEx / 100;
         return centenas;
     }
-    //Longitud del numero introducido
-    static void longNumero (int num){
+    //Selector segun número
+    static void bifNumero (int num){
         int dec = digitDecenas(num);
         int espDec = (digitDecenas(num)*10) + digitUnit(num);
         String vint = null;
@@ -53,9 +50,14 @@ public class LetrasNumeros {
         } else if (num <= 9) {
             eixNum(unidadesLet(digitUnit(num)));
         } else if (num < 20) {
+            //Decenas especiales
             eixNum(desenesEsp(espDec));
         } else if (num >= 20 && num <= 99) {
-           // bloque = 3;
+           /*
+            - Respeta números acabados en cero.
+            - Representa numeros (rango 21-29) con "-i-" intermedia.
+            - Representa números (rango 30-99) con "-" intermedio.
+            */
             if (digitUnit(num) == 0) {
                 eixNum(desenaEnLet(digitDecenas(num)));
             }else if (num <= 29) {
@@ -63,8 +65,22 @@ public class LetrasNumeros {
             }else {
                 eixNum(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
             }
-        } else if (num >= 1000 && num < 999999) {
+        } else if (num >= 100 && num <= 999) {
            // bloque = 4;
+            if ( digitCentenas(num) == 1 && digitDecenas(num) == 0 && digitUnit(num) == 0 ) {
+                eixNum("Cent");
+            }else if (digitDecenas(num) == 0 && digitUnit(num) == 0) {
+                eixNum(unidadesLet(digitCentenas(num)).concat("-cents "));
+            }else if (digitCentenas(num) == 1) {
+                if (digitDecenas(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
+                    eixNum(concatCents(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+                }else{
+                    eixNum(concatCents(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+                }
+            }else {
+                eixNum(concatCentenes(unidadesLet(digitCentenas(num)), 
+                        concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+            }
         } else if (num >= 1000000 && num < 999999999) {
             //bloque = 5;
         }else {
@@ -183,8 +199,8 @@ public class LetrasNumeros {
         return value;
     }
     //Salida de mensajes
-    static void eixNum(String num){
-        System.out.println(num);
+    static void eixNum(String numlet){
+        System.out.println(numlet);
     }
     static void misatgeCab( String mensaje, String cabecera){
         
@@ -210,6 +226,17 @@ public class LetrasNumeros {
         String desenaUnit;
             desenaUnit = desena.concat("-"+unitat);
         return desenaUnit;
+    }
+    static String concatCents(String desena){
+        String centDesenes;
+            centDesenes = "Cent ".concat(desena);
+        return centDesenes;
+    }
+    static String concatCentenes(String centena, String desenas){
+        //Es necesario recibir cadena concatenada Decena-unidades
+        String centDes;
+            centDes = centena.concat("-cents "+desenas);
+        return centDes;
     }
         
 }
