@@ -44,19 +44,25 @@ public class LetrasNumeros {
     }
     //Longitud del numero introducido
     static void longNumero (int num){
-        //int bloque = 0;
         int dec = digitDecenas(num);
-        
+        int espDec = (digitDecenas(num)*10) + digitUnit(num);
+        String vint = null;
         
         if (num <= 0) {
             eixNum("Zero");
         } else if (num <= 9) {
             eixNum(unidadesLet(digitUnit(num)));
         } else if (num < 20) {
-            int espDec = (digitDecenas(num)*10) + digitUnit(num);
             eixNum(desenesEsp(espDec));
-        } else if (num >= 100 && num < 999) {
+        } else if (num >= 20 && num <= 99) {
            // bloque = 3;
+            if (digitUnit(num) == 0) {
+                eixNum(desenaEnLet(digitDecenas(num)));
+            }else if (num <= 29) {
+                eixNum(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
+            }else {
+                eixNum(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
+            }
         } else if (num >= 1000 && num < 999999) {
            // bloque = 4;
         } else if (num >= 1000000 && num < 999999999) {
@@ -146,57 +152,35 @@ public class LetrasNumeros {
         
         switch (desena) {
 
-            case 1:
-            value = "";
-                break;
             case 2:
-            value = "Vint-i-";
+            value = "Vint";
                 break;
             case 3:
-            value = "Trenta-";
+            value = "Trenta";
                 break;
             case 4:
-            value = "Quaranta-";
+            value = "Quaranta";
                 break;
             case 5:
-            value = "Cinquanta-";
+            value = "Cinquanta";
                 break;
             case 6:
-            value = "Seixanta-";
+            value = "Seixanta";
                 break;
             case 7:
-            value = "Setanta-";
+            value = "Setanta";
                 break;
             case 8:
-            value = "Huitanta-";
+            value = "Huitanta";
                 break;
             case 9:
-            value = "Noranta-";
+            value = "Noranta";
                 break;
             default:
-                misatgeCab("Valor no comprés", "Información");
+                misatgeCab("Desena no compresa", "Informació");
                 break;
         }
         return value;
-    }
-    //Bifurcador segun número
-    static void bifurcNum (int longNum){
-        switch (longNum) {
-
-            case 1:
-                eixNum(unidadesLet(digitUnit(longNum)))
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                misatgeCab("Error de bifurcació", "Informació");
-        }
     }
     //Salida de mensajes
     static void eixNum(String num){
@@ -217,6 +201,15 @@ public class LetrasNumeros {
         System.out.println(mensaje);
     }
     //Concatenadores
-    
-    
+    static String concatVint(String desena, String unitat){
+        String desenaUnit ;
+            desenaUnit = desena.concat("-i-"+unitat);
+        return desenaUnit;
+    }
+    static String concatDes(String desena, String unitat){
+        String desenaUnit;
+            desenaUnit = desena.concat("-"+unitat);
+        return desenaUnit;
+    }
+        
 }
