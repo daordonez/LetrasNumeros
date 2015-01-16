@@ -1,4 +1,3 @@
-
 package letrasnumeros;
 
 import java.util.Scanner;
@@ -9,42 +8,46 @@ public class LetrasNumeros {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        //Contenedor de principal de valor
+
+        //Contenedor principal de valor
         int numero;
-        
+
         //Recogida de datos del usuario
         Scanner teclado = new Scanner(System.in);
         System.out.print("Introdueix numero:");
         numero = teclado.nextInt();
-       
+
         //Disparador de las demas funciones
         bifNumero(numero);
-          
+
     }
-    
+
     //Separadores de Centenas-Decenas-Unidades
-    static int digitUnit (int numEx){
+    static int digitUnit(int numEx) {
         int unidades;
-            unidades = numEx % 10;
+        unidades = numEx % 10;
         return unidades;
     }
-    static int digitDecenas( int numEx){
+
+    static int digitDecenas(int numEx) {
         int decenas;
-            decenas = (numEx / 10) % 10;
+        decenas = (numEx / 10) % 10;
         return decenas;
     }
-    static int digitCentenas(int numEx){
+
+    static int digitCentenas(int numEx) {
         int centenas;
-            centenas = numEx / 100;
+        centenas = numEx / 100;
         return centenas;
     }
+
     //Selector segun número
-    static void bifNumero (int num){
+
+    static void bifNumero(int num) {
         int dec = digitDecenas(num);
-        int espDec = (digitDecenas(num)*10) + digitUnit(num);
+        int espDec = (digitDecenas(num) * 10) + digitUnit(num);
         String vint = null;
-        
+
         if (num <= 0) {
             eixNum("Zero");
         } else if (num <= 9) {
@@ -53,109 +56,112 @@ public class LetrasNumeros {
             //Decenas especiales
             eixNum(desenesEsp(espDec));
         } else if (num >= 20 && num <= 99) {
-           /*
-            - Respeta números acabados en cero.
-            - Representa numeros (rango 21-29) con "-i-" intermedia.
-            - Representa números (rango 30-99) con "-" intermedio.
-            */
+            /*
+             - Respeta números acabados en cero.
+             - Representa numeros (rango 21-29) con "-i-" intermedia.
+             - Representa números (rango 30-99) con "-" intermedio.
+             */
             if (digitUnit(num) == 0) {
                 eixNum(desenaEnLet(digitDecenas(num)));
-            }else if (num <= 29) {
+            } else if (num <= 29) {
                 eixNum(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
-            }else {
+            } else {
                 eixNum(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
             }
         } else if (num >= 100 && num <= 999) {
-           // bloque = 4;
-            if ( digitCentenas(num) == 1 && digitDecenas(num) == 0 && digitUnit(num) == 0 ) {
+            // bloque = 4;
+            if (digitCentenas(num) == 1 && digitDecenas(num) == 0 && digitUnit(num) == 0) {
                 eixNum("Cent");
-            }else if (digitDecenas(num) == 0 && digitUnit(num) == 0) {
+            } else if (digitDecenas(num) == 0 && digitUnit(num) == 0) {
                 eixNum(unidadesLet(digitCentenas(num)).concat("-cents "));
-            }else if (digitCentenas(num) == 1) {
+            } else if (digitCentenas(num) == 1) {
                 if (digitDecenas(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
                     eixNum(concatCents(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
-                }else{
+                } else {
                     eixNum(concatCents(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
                 }
-            }else {
-                eixNum(concatCentenes(unidadesLet(digitCentenas(num)), 
+            } else {
+                eixNum(concatCentenes(unidadesLet(digitCentenas(num)),
                         concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
             }
         } else if (num >= 1000000 && num < 999999999) {
             //bloque = 5;
-        }else {
+        } else {
             misatgeCab("Nombre massa llarg", "Informació");
         }
-       // return bloque;
+        // return bloque;
     }
+
     //Conversores a letras
-    static String unidadesLet(int unidad){
-        String value = null ;
+
+    static String unidadesLet(int unidad) {
+        String value = null;
         switch (unidad) {
             case 1:
-            value = "Una";
+                value = "Una";
                 break;
             case 2:
-            value = "Dos";
+                value = "Dos";
                 break;
             case 3:
-            value = "Tres";
+                value = "Tres";
                 break;
             case 4:
-            value = "Quatre";
+                value = "Quatre";
                 break;
             case 5:
-            value = "Cinc";
+                value = "Cinc";
                 break;
             case 6:
-            value = "Sis";
+                value = "Sis";
                 break;
             case 7:
-            value = "Set";
+                value = "Set";
                 break;
             case 8:
-            value = "Huit";
+                value = "Huit";
                 break;
             case 9:
-            value = "Nou";
+                value = "Nou";
                 break;
             default:
                 misatgeCab("Valor no comprés", "Informació");
         }
         return value;
     }
-    static String desenesEsp(int desena){
+
+    static String desenesEsp(int desena) {
         String value = null;
         switch (desena) {
             case 10:
-            value = "Deu";
+                value = "Deu";
                 break;
             case 11:
-            value = "Onze";
+                value = "Onze";
                 break;
             case 12:
-            value = "Dotze";
+                value = "Dotze";
                 break;
             case 13:
-            value = "Tretze";
+                value = "Tretze";
                 break;
             case 14:
-            value = "Catorze";
+                value = "Catorze";
                 break;
             case 15:
-            value = "Quinze";
+                value = "Quinze";
                 break;
             case 16:
-            value = "Setze";
+                value = "Setze";
                 break;
             case 17:
-            value = "Dèsset";
-                break;            
+                value = "Dèsset";
+                break;
             case 18:
-            value = "Dihuit";
+                value = "Dihuit";
                 break;
             case 19:
-            value = "Dènou";
+                value = "Dènou";
                 break;
             default:
                 misatgeCab("Desena especial erronea", "Informació");
@@ -163,34 +169,35 @@ public class LetrasNumeros {
         }
         return value;
     }
-    static String desenaEnLet(int desena){
+
+    static String desenaEnLet(int desena) {
         String value = null;
-        
+
         switch (desena) {
 
             case 2:
-            value = "Vint";
+                value = "Vint";
                 break;
             case 3:
-            value = "Trenta";
+                value = "Trenta";
                 break;
             case 4:
-            value = "Quaranta";
+                value = "Quaranta";
                 break;
             case 5:
-            value = "Cinquanta";
+                value = "Cinquanta";
                 break;
             case 6:
-            value = "Seixanta";
+                value = "Seixanta";
                 break;
             case 7:
-            value = "Setanta";
+                value = "Setanta";
                 break;
             case 8:
-            value = "Huitanta";
+                value = "Huitanta";
                 break;
             case 9:
-            value = "Noranta";
+                value = "Noranta";
                 break;
             default:
                 misatgeCab("Desena no compresa", "Informació");
@@ -198,45 +205,60 @@ public class LetrasNumeros {
         }
         return value;
     }
+
     //Salida de mensajes
-    static void eixNum(String numlet){
+
+    static void eixNum(String numlet) {
         System.out.println(numlet);
     }
-    static void misatgeCab( String mensaje, String cabecera){
-        
-        for (int i = 0; i < 15;i++){System.out.print("_");}
+
+    static void misatgeCab(String mensaje, String cabecera) {
+
+        for (int i = 0; i < 15; i++) {
+            System.out.print("_");
+        }
         System.out.println("");
-        System.out.println("+ "+cabecera+" +");
-        for (int i = 0; i < 15;i++){System.out.print("_");}
+        System.out.println("+ " + cabecera + " +");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("_");
+        }
         System.out.println("");
-        System.out.println("+ "+mensaje+" +");   
-        for (int i = 0; i < 15;i++){System.out.print("_");}
+        System.out.println("+ " + mensaje + " +");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("_");
+        }
         System.out.println("");
     }
-    static void misatgeUs(String mensaje){
+
+    static void misatgeUs(String mensaje) {
         System.out.println(mensaje);
     }
+
     //Concatenadores
-    static String concatVint(String desena, String unitat){
-        String desenaUnit ;
-            desenaUnit = desena.concat("-i-"+unitat);
-        return desenaUnit;
-    }
-    static String concatDes(String desena, String unitat){
+
+    static String concatVint(String desena, String unitat) {
         String desenaUnit;
-            desenaUnit = desena.concat("-"+unitat);
+        desenaUnit = desena.concat("-i-" + unitat);
         return desenaUnit;
     }
-    static String concatCents(String desena){
+
+    static String concatDes(String desena, String unitat) {
+        String desenaUnit;
+        desenaUnit = desena.concat("-" + unitat);
+        return desenaUnit;
+    }
+
+    static String concatCents(String desena) {
         String centDesenes;
-            centDesenes = "Cent ".concat(desena);
+        centDesenes = "Cent ".concat(desena);
         return centDesenes;
     }
-    static String concatCentenes(String centena, String desenas){
+
+    static String concatCentenes(String centena, String desenas) {
         //Es necesario recibir cadena concatenada Decena-unidades
         String centDes;
-            centDes = centena.concat("-cents "+desenas);
+        centDes = centena.concat("-cents " + desenas);
         return centDes;
     }
-        
+
 }
