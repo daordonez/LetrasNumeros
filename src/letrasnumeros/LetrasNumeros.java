@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 public class LetrasNumeros {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         //Contenedor principal de valor
@@ -17,7 +14,7 @@ public class LetrasNumeros {
         System.out.print("Introdueix numero:");
         numero = teclado.nextInt();
 
-        //Disparador de las demas funciones
+        //Disparador de 230funciones
         bifNumero(numero);
 
     }
@@ -75,11 +72,19 @@ public class LetrasNumeros {
             } else if (digitDecenas(num) == 0 && digitUnit(num) == 0) {
                 eixNum(unidadesLet(digitCentenas(num)).concat("-cents "));
             } else if (digitCentenas(num) == 1) {
-                if (digitDecenas(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
+                if (digitDecenas(num) == 0) {
+                    eixNum(concatCents(unidadesLet(digitUnit(num))));
+                } else if (digitDecenas(num) == 1) {
+                    eixNum(concatCents(desenesEsp(espDec)));
+                } else if (digitUnit(num) == 0) {
+                    eixNum(concatCents(desenaEnLet(digitDecenas(num))));
+                } else if (digitDecenas(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
                     eixNum(concatCents(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
                 } else {
                     eixNum(concatCents(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
                 }
+            } else if (digitUnit(num) == 0) {
+                eixNum(concatCentenes(unidadesLet(digitCentenas(num)), desenaEnLet(digitDecenas(num))));
             } else {
                 eixNum(concatCentenes(unidadesLet(digitCentenas(num)),
                         concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
