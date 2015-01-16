@@ -41,7 +41,7 @@ public class LetrasNumeros {
     //Selector segun número
 
     static void bifNumero(int num) {
-        int dec = digitDecenas(num);
+      
         int espDec = (digitDecenas(num) * 10) + digitUnit(num);
         String vint = null;
 
