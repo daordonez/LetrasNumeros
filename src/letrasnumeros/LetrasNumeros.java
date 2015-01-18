@@ -41,17 +41,38 @@ public class LetrasNumeros {
     //Agrupadores 
     static String grupTresDigit(int num) {
 
+<<<<<<< HEAD
         String bloqTres = null;
 
         int espDec = (digitDesenes(num) * 10) + digitUnit(num);
 
         if (num >= 20 && num <= 99) {
+=======
+    static void bifNumero(int num) {
+      
+        int unidades = digitUnit(num);
+        int decenas = digitDecenas(num);
+        int centenas = digitCentenas(num);
+        int espDec = (decenas * 10) + unidades;
+        String vint = null;
+        
+
+        if (num <= 0) {
+            eixNum("Zero");
+        } else if (num <= 9) {
+            eixNum(unidadesLet(unidades));
+        } else if (num < 20) {
+            //Decenas especiales
+            eixNum(desenesEsp(espDec));
+        } else if (num >= 20 && num <= 99) {
+>>>>>>> FETCH_HEAD
             /*
              - Respeta números acabados en cero.
              - Representa numeros (rango 21-29) con "-i-" intermedia.
              - Representa números (rango 30-99) con "-" intermedio.
              */
             if (digitUnit(num) == 0) {
+<<<<<<< HEAD
                 bloqTres = desenaEnLet(digitDesenes(num));
             } else if (num <= 29) {
                 bloqTres = concatVint(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num)));
@@ -83,6 +104,37 @@ public class LetrasNumeros {
             } else {
                 bloqTres = concatCentenes(unidadesLet(digitCentenas(num)),
                         concatDes(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num))));
+=======
+                eixNum(desenaEnLet(decenas));
+            } else if (num <= 29) {
+                eixNum(concatVint(desenaEnLet(decenas), unidadesLet(unidades)));
+            } else {
+                eixNum(concatDes(desenaEnLet(decenas), unidadesLet(unidades)));
+            }
+        } else if (num >= 100 && num <= 999) {
+            // bloque = 4;
+            if (centenas == 1 && decenas == 0 && unidades == 0) {
+                eixNum("Cent");
+            } else if (decenas == 0 && unidades == 0) {
+                eixNum(unidadesLet(centenas).concat("-cents "));
+            } else if (centenas == 1) {
+                if (decenas == 0) {
+                    eixNum(concatCents(unidadesLet(unidades)));
+                } else if (decenas == 1) {
+                    eixNum(concatCents(desenesEsp(espDec)));
+                } else if (unidades == 0) {
+                    eixNum(concatCents(desenaEnLet(decenas)));
+                } else if (decenas == 2 && unidades >= 1 && unidades <= 9) {
+                    eixNum(concatCents(concatVint(desenaEnLet(decenas), unidadesLet(unidades))));
+                } else {
+                    eixNum(concatCents(concatDes(desenaEnLet(decenas), unidadesLet(unidades))));
+                }
+            } else if (unidades == 0) {
+                eixNum(concatCentenes(unidadesLet(centenas), desenaEnLet(decenas)));
+            } else {
+                eixNum(concatCentenes(unidadesLet(centenas),
+                        concatDes(desenaEnLet(decenas), unidadesLet(unidades))));
+>>>>>>> FETCH_HEAD
             }
         }
         return bloqTres;
