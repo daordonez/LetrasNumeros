@@ -42,13 +42,17 @@ public class LetrasNumeros {
 
     static void bifNumero(int num) {
       
-        int espDec = (digitDecenas(num) * 10) + digitUnit(num);
+        int unidades = digitUnit(num);
+        int decenas = digitDecenas(num);
+        int centenas = digitCentenas(num);
+        int espDec = (decenas * 10) + unidades;
         String vint = null;
+        
 
         if (num <= 0) {
             eixNum("Zero");
         } else if (num <= 9) {
-            eixNum(unidadesLet(digitUnit(num)));
+            eixNum(unidadesLet(unidades));
         } else if (num < 20) {
             //Decenas especiales
             eixNum(desenesEsp(espDec));
@@ -59,35 +63,35 @@ public class LetrasNumeros {
              - Representa números (rango 30-99) con "-" intermedio.
              */
             if (digitUnit(num) == 0) {
-                eixNum(desenaEnLet(digitDecenas(num)));
+                eixNum(desenaEnLet(decenas));
             } else if (num <= 29) {
-                eixNum(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
+                eixNum(concatVint(desenaEnLet(decenas), unidadesLet(unidades)));
             } else {
-                eixNum(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num))));
+                eixNum(concatDes(desenaEnLet(decenas), unidadesLet(unidades)));
             }
         } else if (num >= 100 && num <= 999) {
             // bloque = 4;
-            if (digitCentenas(num) == 1 && digitDecenas(num) == 0 && digitUnit(num) == 0) {
+            if (centenas == 1 && decenas == 0 && unidades == 0) {
                 eixNum("Cent");
-            } else if (digitDecenas(num) == 0 && digitUnit(num) == 0) {
-                eixNum(unidadesLet(digitCentenas(num)).concat("-cents "));
-            } else if (digitCentenas(num) == 1) {
-                if (digitDecenas(num) == 0) {
-                    eixNum(concatCents(unidadesLet(digitUnit(num))));
-                } else if (digitDecenas(num) == 1) {
+            } else if (decenas == 0 && unidades == 0) {
+                eixNum(unidadesLet(centenas).concat("-cents "));
+            } else if (centenas == 1) {
+                if (decenas == 0) {
+                    eixNum(concatCents(unidadesLet(unidades)));
+                } else if (decenas == 1) {
                     eixNum(concatCents(desenesEsp(espDec)));
-                } else if (digitUnit(num) == 0) {
-                    eixNum(concatCents(desenaEnLet(digitDecenas(num))));
-                } else if (digitDecenas(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
-                    eixNum(concatCents(concatVint(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+                } else if (unidades == 0) {
+                    eixNum(concatCents(desenaEnLet(decenas)));
+                } else if (decenas == 2 && unidades >= 1 && unidades <= 9) {
+                    eixNum(concatCents(concatVint(desenaEnLet(decenas), unidadesLet(unidades))));
                 } else {
-                    eixNum(concatCents(concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+                    eixNum(concatCents(concatDes(desenaEnLet(decenas), unidadesLet(unidades))));
                 }
-            } else if (digitUnit(num) == 0) {
-                eixNum(concatCentenes(unidadesLet(digitCentenas(num)), desenaEnLet(digitDecenas(num))));
+            } else if (unidades == 0) {
+                eixNum(concatCentenes(unidadesLet(centenas), desenaEnLet(decenas)));
             } else {
-                eixNum(concatCentenes(unidadesLet(digitCentenas(num)),
-                        concatDes(desenaEnLet(digitDecenas(num)), unidadesLet(digitUnit(num)))));
+                eixNum(concatCentenes(unidadesLet(centenas),
+                        concatDes(desenaEnLet(decenas), unidadesLet(unidades))));
             }
         } else if (num >= 1000000 && num < 999999999) {
             //bloque = 5;
