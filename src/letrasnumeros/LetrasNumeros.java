@@ -41,22 +41,19 @@ public class LetrasNumeros {
     //Agrupadores 
     static String grupTresDigit(int num) {
 
-<<<<<<< HEAD
-        String bloqTres = null;
-
-        int espDec = (digitDesenes(num) * 10) + digitUnit(num);
-
-        if (num >= 20 && num <= 99) {
-=======
-    static void bifNumero(int num) {
-      
+//<<<<<<< HEAD
         int unidades = digitUnit(num);
-        int decenas = digitDecenas(num);
+        int decenas = digitDesenes(num);
         int centenas = digitCentenas(num);
         int espDec = (decenas * 10) + unidades;
         String vint = null;
-        
+        String bloqTres = null;
 
+//        int espDec = (digitDesenes(num) * 10) + digitUnit(num);
+
+        if (num >= 20 && num <= 99) {
+//=======
+  
         if (num <= 0) {
             eixNum("Zero");
         } else if (num <= 9) {
@@ -65,46 +62,46 @@ public class LetrasNumeros {
             //Decenas especiales
             eixNum(desenesEsp(espDec));
         } else if (num >= 20 && num <= 99) {
->>>>>>> FETCH_HEAD
+////>>>>>>> FETCH_HEAD
             /*
              - Respeta números acabados en cero.
              - Representa numeros (rango 21-29) con "-i-" intermedia.
              - Representa números (rango 30-99) con "-" intermedio.
              */
             if (digitUnit(num) == 0) {
-<<<<<<< HEAD
-                bloqTres = desenaEnLet(digitDesenes(num));
-            } else if (num <= 29) {
-                bloqTres = concatVint(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num)));
-            } else {
-                bloqTres = concatDes(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num)));
-            }
-        } else if (num >= 100 && num <= 999) {
-            // bloque = 4;
-            if (digitCentenas(num) == 1 && digitDesenes(num) == 0 && digitUnit(num) == 0) {
-                bloqTres = "Cent";
-            } else if (digitDesenes(num) == 0 && digitUnit(num) == 0) {
-                bloqTres = unidadesLet(digitCentenas(num)).concat("-cents ");
-            } else if (digitCentenas(num) == 1) {
-                if (digitDesenes(num) == 0) {
-                    bloqTres = concatCents(unidadesLet(digitUnit(num)));
-                } else if (digitDesenes(num) == 1) {
-                    bloqTres = concatCents(desenesEsp(espDec));
-                } else if (digitUnit(num) == 0) {
-                    bloqTres = concatCents(desenaEnLet(digitDesenes(num)));
-                } else if (digitDesenes(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
-                    bloqTres = concatCents(concatVint(desenaEnLet(digitDesenes(num)),
-                            unidadesLet(digitUnit(num))));
-                } else {
-                    bloqTres = concatCents(concatDes(desenaEnLet(digitDesenes(num)),
-                            unidadesLet(digitUnit(num))));
-                }
-            } else if (digitUnit(num) == 0) {
-                bloqTres = concatCentenes(unidadesLet(digitCentenas(num)), desenaEnLet(digitDesenes(num)));
-            } else {
-                bloqTres = concatCentenes(unidadesLet(digitCentenas(num)),
-                        concatDes(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num))));
-=======
+//<<<<<<< HEAD
+//                bloqTres = desenaEnLet(digitDesenes(num));
+//            } else if (num <= 29) {
+//                bloqTres = concatVint(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num)));
+//            } else {
+//                bloqTres = concatDes(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num)));
+//            }
+//        } else if (num >= 100 && num <= 999) {
+//            // bloque = 4;
+//            if (digitCentenas(num) == 1 && digitDesenes(num) == 0 && digitUnit(num) == 0) {
+//                bloqTres = "Cent";
+//            } else if (digitDesenes(num) == 0 && digitUnit(num) == 0) {
+//                bloqTres = unidadesLet(digitCentenas(num)).concat("-cents ");
+//            } else if (digitCentenas(num) == 1) {
+//                if (digitDesenes(num) == 0) {
+//                    bloqTres = concatCents(unidadesLet(digitUnit(num)));
+//                } else if (digitDesenes(num) == 1) {
+//                    bloqTres = concatCents(desenesEsp(espDec));
+//                } else if (digitUnit(num) == 0) {
+//                    bloqTres = concatCents(desenaEnLet(digitDesenes(num)));
+//                } else if (digitDesenes(num) == 2 && digitUnit(num) >= 1 && digitUnit(num) <= 9) {
+//                    bloqTres = concatCents(concatVint(desenaEnLet(digitDesenes(num)),
+//                            unidadesLet(digitUnit(num))));
+//                } else {
+//                    bloqTres = concatCents(concatDes(desenaEnLet(digitDesenes(num)),
+//                            unidadesLet(digitUnit(num))));
+//                }
+//            } else if (digitUnit(num) == 0) {
+//                bloqTres = concatCentenes(unidadesLet(digitCentenas(num)), desenaEnLet(digitDesenes(num)));
+//            } else {
+//                bloqTres = concatCentenes(unidadesLet(digitCentenas(num)),
+//                        concatDes(desenaEnLet(digitDesenes(num)), unidadesLet(digitUnit(num))));
+//=======
                 eixNum(desenaEnLet(decenas));
             } else if (num <= 29) {
                 eixNum(concatVint(desenaEnLet(decenas), unidadesLet(unidades)));
@@ -134,11 +131,14 @@ public class LetrasNumeros {
             } else {
                 eixNum(concatCentenes(unidadesLet(centenas),
                         concatDes(desenaEnLet(decenas), unidadesLet(unidades))));
->>>>>>> FETCH_HEAD
+//>>>>>>> FETCH_HEAD
             }
+        }
+        
         }
         return bloqTres;
     }
+    
 
     static String grupNouDigit(int num) {
         String grupNou = null;
