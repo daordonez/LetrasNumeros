@@ -54,38 +54,36 @@ public class LetrasNumeros {
              - Representa números (rango 30-99) con "-" intermedio.
              */
             if (unitats == 0) {
-                eixNum(desenaEnLet(desenes));
+                gTres = desenaEnLet(desenes);
             } else if (num <= 29) {
-                eixNum(concatVint(desenaEnLet(desenes), unidadesLet(unitats)));
+                gTres = concatVint(desenaEnLet(desenes), unidadesLet(unitats));
             } else {
-                eixNum(concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
+                gTres = concatDes(desenaEnLet(desenes), unidadesLet(unitats));
             }
         } else if (num >= 100 && num <= 999) {
             // bloque = 4;
             if (centenes == 1 && desenes == 0 && unitats == 0) {
-                eixNum("Cent");
+                gTres = "Cent";
             } else if (desenes == 0 && unitats == 0) {
-                eixNum(unidadesLet(centenes).concat("-cents "));
+                gTres = unidadesLet(centenes).concat("-cents ");
             } else if (centenes == 1) {
                 if (desenes == 0) {
-                    eixNum(concatCents(unidadesLet(unitats)));
+                    gTres = concatCents(unidadesLet(unitats));
                 } else if (desenes == 1) {
-                    eixNum(concatCents(desenesEsp(espDec)));
+                    gTres = concatCents(desenesEsp(espDec));
                 } else if (unitats == 0) {
-                    eixNum(concatCents(desenaEnLet(desenes)));
+                    gTres = concatCents(desenaEnLet(desenes));
                 } else if (desenes == 2 && unitats >= 1 && unitats <= 9) {
-                    eixNum(concatCents(concatVint(desenaEnLet(desenes), unidadesLet(unitats))));
+                    gTres = concatCents(concatVint(desenaEnLet(desenes), unidadesLet(unitats)));
                 } else {
-                    eixNum(concatCents(concatDes(desenaEnLet(desenes), unidadesLet(unitats))));
+                    gTres = concatCents(concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
                 }
             } else if (unitats == 0) {
-                eixNum(concatCentenes(unidadesLet(centenes), desenaEnLet(desenes)));
+                gTres = concatCentenes(unidadesLet(centenes), desenaEnLet(desenes));
             } else {
-                eixNum(concatCentenes(unidadesLet(centenes),
-                        concatDes(desenaEnLet(desenes), unidadesLet(unitats))));
+                gTres = concatCentenes(unidadesLet(centenes),
+                        concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
             }
-        } else if (num >= 1000000 && num < 999999999) {
-            //bloque = 5;
         } else {
             misatgeCab("Nombre massa llarg", "Informació");
         }
