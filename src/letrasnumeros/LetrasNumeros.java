@@ -38,24 +38,16 @@ public class LetrasNumeros {
         return centenas;
     }
 
-    //Selector segun número
+    //Agrupadores
+    static String grupTres(int num) {
 
-    static void bifNumero(int num) {
-      
+        String gTres = null;
         int unitats = digitUnit(num);
         int desenes = digitDecenas(num);
         int centenes = digitCentenas(num);
-        int espDec = (desenes * 10) + unitats);
-        String vint = null;
+        int espDec = ((desenes * 10) + unitats);
 
-        if (num <= 0) {
-            eixNum("Zero");
-        } else if (num <= 9) {
-            eixNum(unidadesLet(unitats));
-        } else if (num < 20) {
-            //Decenas especiales
-            eixNum(desenesEsp(espDec));
-        } else if (num >= 20 && num <= 99) {
+        if (num >= 20 && num <= 99) {
             /*
              - Respeta números acabados en cero.
              - Representa numeros (rango 21-29) con "-i-" intermedia.
@@ -97,11 +89,30 @@ public class LetrasNumeros {
         } else {
             misatgeCab("Nombre massa llarg", "Informació");
         }
+        return gTres;
+    }
+
+    //Selector segun número
+    static void bifNumero(int num) {
+
+        int unitats = digitUnit(num);
+        int desenes = digitDecenas(num);
+        int centenes = digitCentenas(num);
+        int espDec = ((desenes * 10) + unitats);
+
+        if (num <= 0) {
+            eixNum("Zero");
+        } else if (num <= 9) {
+            eixNum(unidadesLet(unitats));
+        } else if (num < 20) {
+            //Decenas especiales
+            eixNum(desenesEsp(espDec));
+        } else {
+        }
         // return bloque;
     }
 
     //Conversores a letras
-
     static String unidadesLet(int unidad) {
         String value = null;
         switch (unidad) {
@@ -215,7 +226,6 @@ public class LetrasNumeros {
     }
 
     //Salida de mensajes
-
     static void eixNum(String numlet) {
         System.out.println(numlet);
     }
@@ -238,12 +248,7 @@ public class LetrasNumeros {
         System.out.println("");
     }
 
-    static void misatgeUs(String mensaje) {
-        System.out.println(mensaje);
-    }
-
     //Concatenadores
-
     static String concatVint(String desena, String unitat) {
         String desenaUnit;
         desenaUnit = desena.concat("-i-" + unitat);
