@@ -78,6 +78,8 @@ public class LetrasNumeros {
                 } else {
                     gTres = concatCents(concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
                 }
+            } else if (desenes == 0) {
+                gTres = concatCentenes(unidadesLet(centenes), unidadesLet(unitats));
             } else if (unitats == 0) {
                 gTres = concatCentenes(unidadesLet(centenes), desenaEnLet(desenes));
             } else {
@@ -91,20 +93,20 @@ public class LetrasNumeros {
     }
 
     static String grupNou(int num) {
-        
+
         String gNou = null;
 
         int unitats = digitUnit(num);
         int desenes = digitDesenes(num);
         int centenes = digitCentenes(num);
-        
+
         int unitMil = (num / 1000) % 10;
         int decMil = (num / 10000) % 10;
         int centMil = (num / 100000) % 10;
-        
+
         int primTres = unitats + (desenes * 10) + (centenes * 100);
-        int segTres = unitMil + (decMil * 10 ) + (centMil * 100);
-        
+        int segTres = unitMil + (decMil * 10) + (centMil * 100);
+
         if (num >= 1000 && num <= 999999) {
 
             if (unitMil == 1 && primTres == 0) {
@@ -141,7 +143,7 @@ public class LetrasNumeros {
             eixNum(grupTres(num));
         } else if (num > 999 && num <= 999999999) {
             eixNum(grupNou(num));
-        } else{
+        } else {
             misatgeCab("Nombre massa llarg", "Informació");
         }
     }
@@ -307,14 +309,14 @@ public class LetrasNumeros {
         centDes = centena.concat("-cents " + desenas);
         return centDes;
     }
-    
-    static String concatMil(String uMil, String centenes){
-        
-        String uMilCent;
-        
-        uMilCent = uMil.concat(" mil "+ centenes);
 
-        return  uMilCent;
+    static String concatMil(String uMil, String centenes) {
+
+        String uMilCent;
+
+        uMilCent = uMil.concat(" mil " + centenes);
+
+        return uMilCent;
     }
 
 }
