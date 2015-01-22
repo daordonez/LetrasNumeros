@@ -101,15 +101,32 @@ public class LetrasNumeros {
 
         String gNou = null;
 
-        int primGrup = num % 1000;
-        num = num / 1000;
-        int segGrup = num % 1000;
-        num = num / 1000;
-        int terGrup = num % 1000;
-        
-        System.out.println("Prim Grup: "+primGrup);
-        System.out.println("Seg Grup: "+segGrup);
-        System.out.println("Terc Grup: "+terGrup);
+        int tempNum = num;
+
+        int primGrup = tempNum % 1000;
+        tempNum = tempNum / 1000;
+        int segGrup = tempNum % 1000;
+        tempNum = tempNum / 1000;
+        int terGrup = tempNum % 1000;
+
+        if (num >= 1000 && num < 999999) {
+            if (segGrup == 1 && primGrup == 0) {
+                gNou = "Mil";
+            } else if (primGrup == 0) {
+                gNou = unidadesLet(segGrup).concat(" mil");
+            }else {
+                gNou = concatMillar(grupTres(segGrup),grupTres(primGrup));
+            }
+        }else if (num >= 1000000 && num <= 999999999) {
+            if (terGrup == 1 && segGrup == 0 && primGrup == 0) {
+                gNou = "Un Milló";
+            }
+            else if (segGrup == 0 && primGrup == 0){
+                gNou = unidadesLet(terGrup).concat(" milions");
+            }else {
+                gNou = concatMilions(grupTres(terGrup), concatMillar(grupTres(segGrup), grupTres(primGrup)));
+            }
+        }
 
         return gNou;
     }
@@ -295,13 +312,20 @@ public class LetrasNumeros {
         return centDes;
     }
 
-    static String concatMil(String uMil, String centenes) {
+    static String concatMillar(String uMil, String centenes) {
 
-        String uMilCent;
+        String MilCent;
 
-        uMilCent = uMil.concat(" mil " + centenes);
+        MilCent = uMil.concat(" mil " + centenes);
 
-        return uMilCent;
+        return MilCent;
+    }
+    
+    static String concatMilions(String milions, String millars){
+        String MiliMilla;
+        
+        MiliMilla = milions.concat(" milions "+millars);
+        return MiliMilla;
     }
 
 }
