@@ -46,8 +46,13 @@ public class LetrasNumeros {
         int desenes = digitDesenes(num);
         int centenes = digitCentenes(num);
         int espDec = ((desenes * 10) + unitats);
-
-        if (num >= 20 && num <= 99) {
+        
+        if (num <= 9) {
+            gTres= unidadesLet(unitats);
+        } else if (num < 20) {
+            //Decenas especiales
+            gTres = desenesEsp(espDec);
+        }else if (num >= 20 && num <= 99) {
             /*
              - Respeta números acabados en cero.
              - Representa numeros (rango 21-29) con "-i-" intermedia.
@@ -107,7 +112,7 @@ public class LetrasNumeros {
         int primTres = unitats + (desenes * 10) + (centenes * 100);
         int segTres = unitMil + (decMil * 10) + (centMil * 100);
 
-        if (num >= 1000 && num <= 999999) {
+        if (num >= 1000 && num <= 9999) {
 
             if (unitMil == 1 && primTres == 0) {
                 gNou = "Mil";
@@ -115,7 +120,9 @@ public class LetrasNumeros {
                 gNou = "Mil ".concat(grupTres(primTres));
             } else if (centenes == 0 && desenes == 0 && unitats == 0) {
                 gNou = unidadesLet(unitMil).concat(" Mil");
-            } else {
+            } else if(centMil == 0){
+                gNou = concatMil(unidadesLet(unitMil), grupTres(primTres));
+            }else {
                 gNou = concatMil(unidadesLet(unitMil), grupTres(primTres));
             }
 
@@ -134,12 +141,7 @@ public class LetrasNumeros {
 
         if (num <= 0) {
             eixNum("Zero");
-        } else if (num <= 9) {
-            eixNum(unidadesLet(unitats));
-        } else if (num < 20) {
-            //Decenas especiales
-            eixNum(desenesEsp(espDec));
-        } else if (num >= 20 && num <= 999) {
+        } else if (num >= 1 && num <= 999) {
             eixNum(grupTres(num));
         } else if (num > 999 && num <= 999999999) {
             eixNum(grupNou(num));
