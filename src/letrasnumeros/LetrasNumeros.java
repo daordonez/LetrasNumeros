@@ -26,13 +26,13 @@ public class LetrasNumeros {
         return unidades;
     }
 
-    static int digitDecenas(int numEx) {
+    static int digitDesenes(int numEx) {
         int decenas;
         decenas = (numEx / 10) % 10;
         return decenas;
     }
 
-    static int digitCentenas(int numEx) {
+    static int digitCentenes(int numEx) {
         int centenas;
         centenas = numEx / 100;
         return centenas;
@@ -43,8 +43,8 @@ public class LetrasNumeros {
 
         String gTres = null;
         int unitats = digitUnit(num);
-        int desenes = digitDecenas(num);
-        int centenes = digitCentenas(num);
+        int desenes = digitDesenes(num);
+        int centenes = digitCentenes(num);
         int espDec = ((desenes * 10) + unitats);
 
         if (num >= 20 && num <= 99) {
@@ -90,12 +90,49 @@ public class LetrasNumeros {
         return gTres;
     }
 
+    static String grupNou(int num) {
+        
+        String gNou = null;
+
+        int unitats = digitUnit(num);
+        int desenes = digitDesenes(num);
+        int centenes = digitCentenes(num);
+        
+        int unitMil = (num / 1000) % 10;
+        int decMil = (num / 10000) % 10;
+        int centMil = num / 100000;
+        
+        int segTres = unitMil + (decMil * 10 ) + (centMil * 100);
+        
+        System.out.println("Unidades de millar: "+unitMil);
+        System.out.println("Deceneas de millar: "+decMil);
+        System.out.println("Centenas de millar: "+centMil);
+        System.out.println("Centenas: "+centenes);
+        System.out.println("Decenas: "+desenes);
+        System.out.println("Unidades: "+unitats);
+        
+        
+        if (num >= 1000 && num <= 999999) {
+            
+            if (unitMil == 1 && centenes == 10 && desenes == 0 && unitats == 0) {
+                gNou = "Mil";   
+//            }else if (segTres == 100 && centenes == 0 && desenes == 0 && unitats == 0){
+//                gNou = grupTres(segTres).concat(" mil");
+//            }else {
+//                gNou = concatMil(grupTres(segTres), grupTres(num));
+            }
+            
+        }
+
+        return gNou;
+    }
+
     //Selector segun número
     static void bifNumero(int num) {
 
         int unitats = digitUnit(num);
-        int desenes = digitDecenas(num);
-        int centenes = digitCentenas(num);
+        int desenes = digitDesenes(num);
+        int centenes = digitCentenes(num);
         int espDec = ((desenes * 10) + unitats);
 
         if (num <= 0) {
@@ -105,9 +142,13 @@ public class LetrasNumeros {
         } else if (num < 20) {
             //Decenas especiales
             eixNum(desenesEsp(espDec));
-        } else {
+        } else if (num >= 20 && num <= 999) {
+            eixNum(grupTres(num));
+        } else if (num > 999 && num <= 999999999) {
+            eixNum(grupNou(num));
+        } else{
+            misatgeCab("Nombre massa llarg", "Informació");
         }
-        // return bloque;
     }
 
     //Conversores a letras
@@ -270,6 +311,15 @@ public class LetrasNumeros {
         String centDes;
         centDes = centena.concat("-cents " + desenas);
         return centDes;
+    }
+    
+    static String concatMil(String uMil, String centenes){
+        
+        String uMilCent;
+        
+        uMilCent = uMil.concat(" mil "+ centenes);
+
+        return  uMilCent;
     }
 
 }
