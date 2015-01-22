@@ -101,32 +101,15 @@ public class LetrasNumeros {
 
         String gNou = null;
 
-        int unitats = digitUnit(num);
-        int desenes = digitDesenes(num);
-        int centenes = digitCentenes(num);
-
-        int unitMil = (num / 1000) % 10;
-        int decMil = (num / 10000) % 10;
-        int centMil = (num / 100000) % 10;
-
-        int primTres = unitats + (desenes * 10) + (centenes * 100);
-        int segTres = unitMil + (decMil * 10) + (centMil * 100);
-
-        if (num >= 1000 && num <= 9999) {
-
-            if (unitMil == 1 && primTres == 0) {
-                gNou = "Mil";
-            } else if (unitMil == 1 && !(primTres == 0)) {
-                gNou = "Mil ".concat(grupTres(primTres));
-            } else if (centenes == 0 && desenes == 0 && unitats == 0) {
-                gNou = unidadesLet(unitMil).concat(" Mil");
-            } else if(centMil == 0){
-                gNou = concatMil(unidadesLet(unitMil), grupTres(primTres));
-            }else {
-                gNou = concatMil(unidadesLet(unitMil), grupTres(primTres));
-            }
-
-        }
+        int primGrup = num % 1000;
+        num = num / 1000;
+        int segGrup = num % 1000;
+        num = num / 1000;
+        int terGrup = num % 1000;
+        
+        System.out.println("Prim Grup: "+primGrup);
+        System.out.println("Seg Grup: "+segGrup);
+        System.out.println("Terc Grup: "+terGrup);
 
         return gNou;
     }
