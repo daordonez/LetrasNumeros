@@ -34,7 +34,7 @@ public class LetrasNumeros {
 
     static int digitCentenes(int numEx) {
         int centenas;
-        centenas = numEx / 100;
+        centenas = (numEx / 100) % 10;
         return centenas;
     }
 
@@ -100,28 +100,23 @@ public class LetrasNumeros {
         
         int unitMil = (num / 1000) % 10;
         int decMil = (num / 10000) % 10;
-        int centMil = num / 100000;
+        int centMil = (num / 100000) % 10;
         
+        int primTres = unitats + (desenes * 10) + (centenes * 100);
         int segTres = unitMil + (decMil * 10 ) + (centMil * 100);
         
-        System.out.println("Unidades de millar: "+unitMil);
-        System.out.println("Deceneas de millar: "+decMil);
-        System.out.println("Centenas de millar: "+centMil);
-        System.out.println("Centenas: "+centenes);
-        System.out.println("Decenas: "+desenes);
-        System.out.println("Unidades: "+unitats);
-        
-        
         if (num >= 1000 && num <= 999999) {
-            
-            if (unitMil == 1 && centenes == 10 && desenes == 0 && unitats == 0) {
-                gNou = "Mil";   
-//            }else if (segTres == 100 && centenes == 0 && desenes == 0 && unitats == 0){
-//                gNou = grupTres(segTres).concat(" mil");
-//            }else {
-//                gNou = concatMil(grupTres(segTres), grupTres(num));
+
+            if (unitMil == 1 && primTres == 0) {
+                gNou = "Mil";
+            } else if (unitMil == 1 && !(primTres == 0)) {
+                gNou = "Mil ".concat(grupTres(primTres));
+            } else if (centenes == 0 && desenes == 0 && unitats == 0) {
+                gNou = unidadesLet(unitMil).concat(" Mil");
+            } else {
+                gNou = concatMil(unidadesLet(unitMil), grupTres(primTres));
             }
-            
+
         }
 
         return gNou;
