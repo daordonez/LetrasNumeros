@@ -114,7 +114,9 @@ public class LetrasNumeros {
                 gNou = "Mil";
             } else if (primGrup == 0) {
                 gNou = unidadesLet(segGrup).concat(" mil");
-            } else {
+            } else if( segGrup == 1){
+                gNou = "Mil ".concat(grupTres(primGrup));
+            }else {
                 gNou = concatMillar(grupTres(segGrup), grupTres(primGrup));
             }
         } else if (num >= 1000000 && num <= 999999999) {
@@ -140,7 +142,9 @@ public class LetrasNumeros {
         int centenes = digitCentenes(num);
         int espDec = ((desenes * 10) + unitats);
 
-        if (num <= 0) {
+        if ( num < 0){
+            misatgeCab("Número negatiu", "Informació");
+        }else if (num <= 0) {
             eixNum("Zero");
         } else if (num >= 1 && num <= 999) {
             eixNum(grupTres(num));
