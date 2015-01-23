@@ -61,9 +61,9 @@ public class LetrasNumeros {
             if (unitats == 0) {
                 gTres = desenaEnLet(desenes);
             } else if (num <= 29) {
-                gTres = concatVint(desenaEnLet(desenes), unidadesLet(unitats));
+                gTres = concatMulti(desenaEnLet(desenes), "i", unidadesLet(unitats));
             } else {
-                gTres = concatDes(desenaEnLet(desenes), unidadesLet(unitats));
+                gTres = concatMulti(desenaEnLet(desenes), "-", unidadesLet(unitats));
             }
         } else if (num >= 100 && num <= 999) {
             // bloque = 4;
@@ -79,17 +79,17 @@ public class LetrasNumeros {
                 } else if (unitats == 0) {
                     gTres = concatCents(desenaEnLet(desenes));
                 } else if (desenes == 2 && unitats >= 1 && unitats <= 9) {
-                    gTres = concatCents(concatVint(desenaEnLet(desenes), unidadesLet(unitats)));
+                    gTres = concatCents(concatMulti(desenaEnLet(desenes), "i", unidadesLet(unitats)));
                 } else {
-                    gTres = concatCents(concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
+                    gTres = concatCents(concatMulti(desenaEnLet(desenes), "-", unidadesLet(unitats)));
                 }
             } else if (desenes == 0) {
-                gTres = concatCentenes(unidadesLet(centenes), unidadesLet(unitats));
+                gTres = concatMulti(unidadesLet(centenes), "-cents", unidadesLet(unitats));
             } else if (unitats == 0) {
-                gTres = concatCentenes(unidadesLet(centenes), desenaEnLet(desenes));
+                gTres = concatMulti(unidadesLet(centenes), "-cents", desenaEnLet(desenes));
             } else {
-                gTres = concatCentenes(unidadesLet(centenes),
-                        concatDes(desenaEnLet(desenes), unidadesLet(unitats)));
+                gTres = concatMulti(unidadesLet(centenes),"-cents" , concatMulti(desenaEnLet(desenes), "-",
+                        unidadesLet(unitats)));
             }
         } else {
             misatgeCab("Nombre massa llarg", "Informació");
@@ -114,20 +114,21 @@ public class LetrasNumeros {
                 gNou = "Mil";
             } else if (primGrup == 0) {
                 gNou = unidadesLet(segGrup).concat(" mil");
-            } else if( segGrup == 1){
+            } else if (segGrup == 1) {
                 gNou = "Mil ".concat(grupTres(primGrup));
-            }else {
-                gNou = concatMillar(grupTres(segGrup), grupTres(primGrup));
+            } else {
+                gNou = concatMulti(grupTres(segGrup), "mil", grupTres(primGrup));
             }
         } else if (num >= 1000000 && num <= 999999999) {
             if (terGrup == 1 && segGrup == 0 && primGrup == 0) {
                 gNou = "Un Milló";
             } else if (segGrup == 0 && primGrup == 0) {
                 gNou = grupTres(terGrup).concat(" milions");
-            } else if(segGrup == 0){
-                gNou = concatMilions(grupTres(terGrup), grupTres(primGrup));
-            }else {
-                gNou = concatMilions(grupTres(terGrup), concatMillar(grupTres(segGrup), grupTres(primGrup)));
+            } else if (segGrup == 0) {
+                gNou = concatMulti(grupTres(terGrup), "milions", grupTres(primGrup));
+            } else {
+                gNou = concatMulti(grupTres(terGrup), "milions", concatMulti(grupTres(segGrup),
+                        "mil", grupTres(primGrup)));
             }
         }
 
@@ -137,14 +138,10 @@ public class LetrasNumeros {
     //Selector segun número
     static void bifNumero(int num) {
 
-        int unitats = digitUnit(num);
-        int desenes = digitDesenes(num);
-        int centenes = digitCentenes(num);
-        int espDec = ((desenes * 10) + unitats);
 
-        if ( num < 0){
+        if (num < 0) {
             misatgeCab("Número negatiu", "Informació");
-        }else if (num <= 0) {
+        } else if (num <= 0) {
             eixNum("Zero");
         } else if (num >= 1 && num <= 999) {
             eixNum(grupTres(num));
@@ -269,8 +266,13 @@ public class LetrasNumeros {
     }
 
     //Salida de mensajes
-    static void eixNum(String numlet) {
-        System.out.println(numlet.toLowerCase());
+    /**
+     * Función de salida princial de mensajes. Esta función muestra por pantalla la 
+     * cadena pasada por paramtro
+     * @param cadena 
+     */
+    static void eixNum(String cadena) {
+        System.out.println(cadena.toLowerCase());
     }
 
     static void misatgeCab(String mensaje, String cabecera) {
@@ -292,45 +294,30 @@ public class LetrasNumeros {
     }
 
     //Concatenadores
-    static String concatVint(String desena, String unitat) {
-        String desenaUnit;
-        desenaUnit = desena.concat("-i-" + unitat);
-        return desenaUnit;
-    }
-
-    static String concatDes(String desena, String unitat) {
-        String desenaUnit;
-        desenaUnit = desena.concat("-" + unitat);
-        return desenaUnit;
-    }
-
     static String concatCents(String desena) {
         String centDesenes;
         centDesenes = "Cent ".concat(desena);
         return centDesenes;
     }
 
-    static String concatCentenes(String centena, String desenas) {
-        //Es necesario recibir cadena concatenada Decena-unidades
-        String centDes;
-        centDes = centena.concat("-cents " + desenas);
-        return centDes;
-    }
 
-    static String concatMillar(String uMil, String centenes) {
+    /**
+     *
+     * Esta función concatena tres cadenas insertando entre la primera y la
+     * segunda, y la tercera y la segunda espacios. Es util para la
+     * concatenación de cadenas que provienen desde otras funciones.
+     *
+     * @param primConjNum Cadena 1
+     * @param unidad Cadena 2, separada por espacios delante y detras.
+     * @param segConjNum Cadena 3
+     * @return Devuelve una sola cadena proveniente desde 3. Inserta espacios
+     * entre la primera y la tercera cadena
+     */
+    static String concatMulti(String primConjNum, String unidad, String segConjNum) {
 
-        String MilCent;
-
-        MilCent = uMil.concat(" mil " + centenes);
-
-        return MilCent;
-    }
-
-    static String concatMilions(String milions, String millars) {
-        String MiliMilla;
-
-        MiliMilla = milions.concat(" milions " + millars);
-        return MiliMilla;
+        String concatenado;
+        concatenado = primConjNum.concat(" "+unidad+" "+ segConjNum);
+        return concatenado;
     }
 
 }
