@@ -121,9 +121,9 @@ public class LetrasNumeros {
             if (terGrup == 1 && segGrup == 0 && primGrup == 0) {
                 gNou = "Un Milló";
             } else if (segGrup == 0 && primGrup == 0) {
-                gNou = unidadesLet(terGrup).concat(" milions");
-//            } else if(digitCentenes(terGrup) != 0){
-//                
+                gNou = grupTres(terGrup).concat(" milions");
+            } else if(segGrup == 0){
+                gNou = concatMilions(grupTres(terGrup), grupTres(primGrup));
             }else {
                 gNou = concatMilions(grupTres(terGrup), concatMillar(grupTres(segGrup), grupTres(primGrup)));
             }
@@ -266,7 +266,7 @@ public class LetrasNumeros {
 
     //Salida de mensajes
     static void eixNum(String numlet) {
-        System.out.println(numlet);
+        System.out.println(numlet.toLowerCase());
     }
 
     static void misatgeCab(String mensaje, String cabecera) {
