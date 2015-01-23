@@ -16,6 +16,8 @@ public class LetrasNumeros {
 
         //Disparador de 230funciones
         bifNumero(numero);
+        
+        
 
     }
 
@@ -88,7 +90,7 @@ public class LetrasNumeros {
             } else if (unitats == 0) {
                 gTres = concatMulti(unidadesLet(centenes), "-cents", desenaEnLet(desenes));
             } else {
-                gTres = concatMulti(unidadesLet(centenes),"-cents" , concatMulti(desenaEnLet(desenes), "-",
+                gTres = concatMulti(unidadesLet(centenes), "-cents", concatMulti(desenaEnLet(desenes), "-",
                         unidadesLet(unitats)));
             }
         } else {
@@ -137,7 +139,6 @@ public class LetrasNumeros {
 
     //Selector segun número
     static void bifNumero(int num) {
-
 
         if (num < 0) {
             misatgeCab("Número negatiu", "Informació");
@@ -267,14 +268,22 @@ public class LetrasNumeros {
 
     //Salida de mensajes
     /**
-     * Función de salida princial de mensajes. Esta función muestra por pantalla la 
-     * cadena pasada por paramtro
-     * @param cadena 
+     * Función de salida princial de mensajes. Esta función muestra por pantalla
+     * la cadena pasada por paramtro
+     *
+     * @param cadena Valor que se desea imprimir en consola
      */
     static void eixNum(String cadena) {
         System.out.println(cadena.toLowerCase());
     }
 
+    /**
+     * Mediante esto es posible mostrar separado por lineas un mensaje y una
+     * cabecera.
+     *
+     * @param mensaje Mensaje que se desa mostrar
+     * @param cabecera Cabecera de la salida
+     */
     static void misatgeCab(String mensaje, String cabecera) {
 
         for (int i = 0; i < 15; i++) {
@@ -300,7 +309,6 @@ public class LetrasNumeros {
         return centDesenes;
     }
 
-
     /**
      *
      * Esta función concatena tres cadenas insertando entre la primera y la
@@ -316,7 +324,7 @@ public class LetrasNumeros {
     static String concatMulti(String primConjNum, String unidad, String segConjNum) {
 
         String concatenado;
-        concatenado = primConjNum.concat(" "+unidad+" "+ segConjNum);
+        concatenado = primConjNum.concat(" " + unidad + " " + segConjNum);
         return concatenado;
     }
 
