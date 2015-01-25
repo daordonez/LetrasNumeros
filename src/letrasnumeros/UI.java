@@ -102,6 +102,9 @@ public class UI extends javax.swing.JFrame {
         setTitle("Conversor de numeros");
 
         salidaResulta.setBackground(new java.awt.Color(255, 255, 255));
+        salidaResulta.setFont(new java.awt.Font("Chalkduster", 0, 14)); // NOI18N
+        salidaResulta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        salidaResulta.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         salidaResulta.setAutoscrolls(true);
         salidaResulta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
