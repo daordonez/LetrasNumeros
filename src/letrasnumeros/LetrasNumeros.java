@@ -36,16 +36,16 @@ public class LetrasNumeros {
             }
         });
 
-        //Contenedor principal de valor
-        int numero;
-
-        //Recogida de datos del usuario
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Introdueix numero:");
-        numero = teclado.nextInt();
-
-        //Disparador de 230funciones
-        bifNumero(numero);
+//        //Contenedor principal de valor
+//        int numero;
+//
+//        //Recogida de datos del usuario
+//        Scanner teclado = new Scanner(System.in);
+//        System.out.print("Introdueix numero:");
+//        numero = teclado.nextInt();
+//
+//        //Disparador de 230funciones
+//        bifNumero(numero);
         
         
 
@@ -168,19 +168,23 @@ public class LetrasNumeros {
     }
 
     //Selector segun número
-    static void bifNumero(int num) {
+    static String bifNumero(int num) {
+        
+        String salida;
 
         if (num < 0) {
-            misatgeCab("Número negatiu", "Informació");
+            salida = "Numero Negativo";
         } else if (num <= 0) {
-            eixNum("Zero");
+            salida = "Zero";
         } else if (num >= 1 && num <= 999) {
-            eixNum(grupTres(num));
+            salida = grupTres(num);
         } else if (num > 999 && num <= 999999999) {
-            eixNum(grupNou(num));
+           salida = grupNou(num);
         } else {
-            misatgeCab("Nombre massa llarg", "Informació");
+            salida = "Nuéro muy largo";
         }
+        
+        return salida.toLowerCase();
     }
 
     //Conversores a letras
