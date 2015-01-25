@@ -5,17 +5,47 @@ import java.util.Scanner;
 public class LetrasNumeros {
 
     public static void main(String[] args) {
+        
+         /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-        //Contenedor principal de valor
-        int numero;
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UI().setVisible(true);
+            }
+        });
 
-        //Recogida de datos del usuario
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Introdueix numero:");
-        numero = teclado.nextInt();
-
-        //Disparador de 230funciones
-        bifNumero(numero);
+//        //Contenedor principal de valor
+//        int numero;
+//
+//        //Recogida de datos del usuario
+//        Scanner teclado = new Scanner(System.in);
+//        System.out.print("Introdueix numero:");
+//        numero = teclado.nextInt();
+//
+//        //Disparador de 230funciones
+//        bifNumero(numero);
         
         
 
@@ -138,19 +168,23 @@ public class LetrasNumeros {
     }
 
     //Selector segun número
-    static void bifNumero(int num) {
+    static String bifNumero(int num) {
+        
+        String salida;
 
         if (num < 0) {
-            misatgeCab("Número negatiu", "Informació");
+            salida = "Numero Negativo";
         } else if (num <= 0) {
-            eixNum("Zero");
+            salida = "Zero";
         } else if (num >= 1 && num <= 999) {
-            eixNum(grupTres(num));
+            salida = grupTres(num);
         } else if (num > 999 && num <= 999999999) {
-            eixNum(grupNou(num));
+           salida = grupNou(num);
         } else {
-            misatgeCab("Nombre massa llarg", "Informació");
+            salida = "Nuéro muy largo";
         }
+        
+        return salida.toLowerCase();
     }
 
     //Conversores a letras
