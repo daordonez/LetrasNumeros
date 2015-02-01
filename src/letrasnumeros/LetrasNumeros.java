@@ -181,7 +181,7 @@ public class LetrasNumeros {
         } else if (num > 999 && num <= 999999999) {
            salida = grupNou(num);
         } else {
-            salida = "Nuéro muy largo";
+            salida = "Fora de rang";
         }
         
         return salida.toLowerCase();
